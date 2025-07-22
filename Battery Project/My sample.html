@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Battery Health Checker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #fff;
+      border-radius: 5px;
+      font-size: 18px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Battery Health Checker</h1>
+  <label for="design">Design Capacity (mWh)</label>
+  <input type="number" id="design" value="58003" />
+
+  <label for="full">Full Charge Capacity (mWh)</label>
+  <input type="number" id="full" value="41435" />
+
+  <button onclick="calculateHealth()">Check Battery Health</button>
+
+  <div id="result"></div>
+
+  <script>
+    function calculateHealth() {
+      const design = parseFloat(document.getElementById('design').value);
+      const full = parseFloat(document.getElementById('full').value);
+
+      if (isNaN(design) || isNaN(full) || design <= 0) {
+        document.getElementById('result').innerText = "Please enter valid numbers.";
+        return;
+      }
+
+      const health = (full / design) * 100;
+      document.getElementById('result').innerText = 
+        `Battery Health: ${health.toFixed(1)}%`;
+    }
+  </script>
+
+<script>
+    (function(d,t) {
+      var BASE_URL="https://app.chatwoot.com";
+      var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src=BASE_URL+"/packs/js/sdk.js";
+      g.async = true;
+      s.parentNode.insertBefore(g,s);
+      g.onload=function(){
+        window.chatwootSDK.run({
+          websiteToken: 'oLtaUktZ55YGo4iY1zyymCC1',
+          baseUrl: BASE_URL
+        })
+      }
+    })(document,"script");
+  </script>
+  
+
+</body>
+</html>
